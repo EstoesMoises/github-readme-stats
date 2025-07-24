@@ -7,12 +7,17 @@ import gistCard from "./api/gist.js";
 import express from "express";
 
 const app = express();
+const router = express.Router();
 
-app.get("/", statsCard);
-app.get("/pin", repoCard);
-app.get("/top-langs", langCard);
-app.get("/wakatime", wakatimeCard);
-app.get("/gist", gistCard);
+// Define routes on the router
+router.get("/", statsCard);
+router.get("/pin", repoCard);
+router.get("/top-langs", langCard);
+router.get("/wakatime", wakatimeCard);
+router.get("/gist", gistCard);
+
+// Mount the router at /api
+app.use("/api", router);
 
 const port = process.env.PORT || 9000;
 app.listen(port, "0.0.0.0", () => {
